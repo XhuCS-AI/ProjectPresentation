@@ -11,8 +11,8 @@
     {
       "name": "基于语义生成数据分布情况",
       "intro": "聚焦于高质量的模拟数据而非合成数据的尝试, 用AI自动生成高质量数据",
-      "leader": "无",
-      "members": ["无"]
+      "leader": "向阳",
+      "members": ["钟俊", "李春利"]
     },    
     {
       "name": "SyntheticDataSimulator 使用开发",

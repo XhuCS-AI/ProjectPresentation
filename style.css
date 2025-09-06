@@ -1,0 +1,257 @@
+:root {
+    --bg: #0a0f16;
+    /* 深空背景 */
+    --bg-2: #0d121b;
+    /* 备用层次 */
+    --fg: #e6f0ff;
+    /* 文字 */
+    --muted: #a7b3c9;
+    --neon-1: #00e5ff;
+    /* 赛博霓虹-青 */
+    --neon-2: #a855f7;
+    /* 赛博霓虹-紫 */
+    --card: rgba(255, 255, 255, 0.04);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --glass: rgba(255, 255, 255, 0.06);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    color: var(--fg);
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+    background: radial-gradient(1200px 800px at 20% -10%, rgba(168, 85, 247, 0.15), transparent 60%),
+        radial-gradient(1000px 900px at 110% 20%, rgba(0, 229, 255, 0.12), transparent 55%),
+        var(--bg);
+    overflow-x: hidden;
+}
+
+/* 全屏科幻线条背景 */
+#bg-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    display: block;
+    background: transparent;
+}
+
+/* 头部标题 */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    backdrop-filter: saturate(140%) blur(8px);
+    background: linear-gradient(180deg, rgba(10, 15, 22, 0.9) 0%, rgba(10, 15, 22, 0.65) 100%);
+    border-bottom: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 18px 20px;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    font-size: clamp(22px, 2.8vw, 36px);
+    letter-spacing: 0.4px;
+    font-weight: 700;
+    line-height: 1.2;
+    background: linear-gradient(90deg, var(--neon-1), var(--neon-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 12px rgba(0, 229, 255, 0.25), 0 0 18px rgba(168, 85, 247, 0.25);
+}
+
+/* 装饰性的下划线霓虹条 */
+.neon-underline {
+    width: 220px;
+    height: 2px;
+    margin: 10px auto 0;
+    position: relative;
+    background: linear-gradient(90deg, transparent, var(--neon-1), var(--neon-2), transparent);
+    filter: drop-shadow(0 0 6px rgba(0, 229, 255, 0.6));
+}
+
+main {
+    padding: 28px 16px 60px;
+}
+
+.department-container {
+    display: grid;
+    gap: 18px;
+    align-items: start;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+    .department-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 720px) {
+    .department-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.department {
+    position: relative;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow);
+    padding: 12px;
+    min-height: 420px;
+    overflow: hidden;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    isolation: isolate;
+    /* 让内部伪元素不溢出 */
+}
+
+.department::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(120deg, rgba(0, 229, 255, 0.18), rgba(168, 85, 247, 0.18) 50%, transparent 60%);
+    mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 1px;
+    pointer-events: none;
+    z-index: -1;
+    filter: blur(8px);
+}
+
+.department:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    border-color: rgba(0, 229, 255, 0.35);
+}
+
+.department h2 {
+    margin: 0 0 8px 0;
+    font-size: 18px;
+    letter-spacing: .4px;
+    font-weight: 700;
+    color: var(--fg);
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, rgba(0, 229, 255, 0.18), rgba(168, 85, 247, 0.18));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.25);
+}
+
+.project-list {
+    margin-top: 8px;
+    padding-right: 4px;
+    max-height: 60vh;
+    overflow: auto;
+}
+
+.project-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.project-list::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--neon-1), var(--neon-2));
+    border-radius: 8px;
+}
+
+.project-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+}
+
+.project-card {
+    position: relative;
+    background: var(--glass);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 12px 12px 12px 14px;
+    margin-bottom: 12px;
+    transition: border-color .25s ease, transform .25s ease;
+}
+
+.project-card:hover {
+    border-color: rgba(0, 229, 255, 0.35);
+    transform: translateY(-2px);
+}
+
+.project-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 16px;
+    color: var(--fg);
+}
+
+.project-card p {
+    margin: 3px 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.55;
+}
+
+.project-card strong {
+    color: #cfe5ff;
+    font-weight: 600;
+}
+
+/* 小型赛博分隔线 */
+.divider {
+    height: 1px;
+    margin: 10px 0;
+    border: none;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+/* 轻量动效 */
+@keyframes float {
+    from {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-3px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+.project-card {
+    animation: float 5s ease-in-out infinite;
+}
+
+footer {
+    color: #8fa0ba;
+    text-align: center;
+    font-size: 12px;
+    padding: 30px 0 10px;
+}
+
+a {
+    color: var(--neon-1);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

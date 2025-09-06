@@ -1,120 +1,30 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>百度-西华大学人工智能领航团课题/项目公示</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f7f9fc;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .department-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .department {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            height: 80vh;
-        }
-        .department h2 {
-            text-align: center;
-            margin-bottom: 10px;
-            background-color: #4a90e2;
-            color: white;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        .project-list {
-            overflow-y: auto;
-            flex: 1;
-            padding-right: 5px;
-        }
-        .project-card {
-            background-color: #fefefe;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .project-card h3 {
-            margin: 0 0 5px 0;
-            color: #333;
-        }
-        .project-card p {
-            margin: 3px 0;
-            font-size: 0.9em;
-            color: #555;
-        }
-        /* 滚动条美化 */
-        .project-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        .project-list::-webkit-scrollbar-thumb {
-            background-color: #bbb;
-            border-radius: 3px;
-        }
-        .project-list::-webkit-scrollbar-track {
-            background-color: #eee;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>百度-西华大学人工智能领航团课题/项目公示</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>百度-西华大学人工智能领航团课题/项目</h1>
-    <div id="departments" class="department-container"></div>
+  <!-- 背景：科幻漂浮线条 + 交互粒子 -->
+  <canvas id="bg-canvas"></canvas>
 
-    <script>
-        async function loadData() {
-            try {
-                const response = await fetch('data.json');
-                const data = await response.json();
+  <header>
+    <div class="container">
+      <h1>百度-西华大学人工智能领航团课题/项目</h1>
+      <div class="neon-underline" aria-hidden="true"></div>
+    </div>
+  </header>
 
-                const container = document.getElementById('departments');
-                for (const dept in data) {
-                    const deptDiv = document.createElement('div');
-                    deptDiv.className = 'department';
+  <main class="container">
+    <div id="departments" class="department-container" aria-live="polite"></div>
+  </main>
 
-                    const deptTitle = document.createElement('h2');
-                    deptTitle.textContent = dept;
-                    deptDiv.appendChild(deptTitle);
+  <footer>
+    <div class="container">穿越数据星河 · 智能点亮未来</div>
+  </footer>
 
-                    const projectList = document.createElement('div');
-                    projectList.className = 'project-list';
-
-                    data[dept].forEach(project => {
-                        const card = document.createElement('div');
-                        card.className = 'project-card';
-                        card.innerHTML = `
-                            <h3>${project.name}</h3>
-                            <p><strong>介绍：</strong>${project.intro}</p>
-                            <p><strong>负责人：</strong>${project.leader}</p>
-                            <p><strong>参与成员：</strong>${project.members.join(', ')}</p>
-                        `;
-                        projectList.appendChild(card);
-                    });
-
-                    deptDiv.appendChild(projectList);
-                    container.appendChild(deptDiv);
-                }
-            } catch (error) {
-                console.error('加载数据出错:', error);
-            }
-        }
-
-        loadData();
-    </script>
+  <script src="script.js"></script>
 </body>
 </html>
